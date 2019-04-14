@@ -1,5 +1,28 @@
 <template>
 	<div class="dashboardAdmin" >
-	<h1>admin</h1>
+		<dashboardAdminNav></dashboardAdminNav>			
 	</div>
 </template>
+
+<script>
+import dashboardAdminNav from "@/components/dashboardAdmin/nav.vue";
+
+export default {
+	name: 'dashboardAdmin',
+	components:{
+		dashboardAdminNav
+	},
+	data() {
+		return {
+			
+		}
+	},
+	methods: {
+	}
+
+}
+</script>
+
+<style scoped>
+
+</style>

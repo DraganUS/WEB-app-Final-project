@@ -5,7 +5,7 @@
     <v-flex xs12 md5>
     <h3>Fiil the form to schedule an appointment</h3>
     </v-flex>
-  <form  method="post">
+  <form action="php/test.php" method="post">
      <v-flex xs12 md5>
     <v-text-field 
       v-model="name"
