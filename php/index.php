@@ -7,6 +7,8 @@ try {
 } catch (Exception $exception) {
     $users = [];
 }
+
+
 header("Content-Type:application/json");
 
 echo  json_encode($users);

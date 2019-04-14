@@ -6,12 +6,12 @@ import router from './router'
 import axios from 'axios'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-// import VueMaterial from 'vue-material'
 import Vuelidate from 'vuelidate'
+import SmartTable from 'vuejs-smart-table'
 
+Vue.use(SmartTable)
 Vue.use(Vuelidate)
 Vue.use(Vuetify)
-// Vue.use(VueMaterial)
 
 Vue.config.productionTip = false
 

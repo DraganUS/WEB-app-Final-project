@@ -1,11 +1,15 @@
 <template>
-    <div class="nav">
-         <v-app dark>
-    <v-navigation-drawer
+    <div class="nav">      
+      <v-app dark>     
+<v-flex xs6>
+  <v-navigation-drawer
   v-model="drawer"
+    right
     :mini-variant.sync="mini"
     hide-overlay
     stateless
+    absolute
+    width="200"  
   >
     <v-toolbar flat class="transparent">
       <v-list class="pa-0">
@@ -37,7 +41,7 @@
       <v-list-tile
         v-for="item in items"
         :key="item.title"
-        @click=""
+        @click="goTo(item.title)"
       >
         <v-list-tile-action>
           <v-icon>{{ item.icon }}</v-icon>
@@ -52,8 +56,7 @@
         <v-list-tile
          v-for="out in logOut"
         :key="out.title"
-        @click=""
-      
+        @click="logOutAdmin(out)"
       >
         <v-list-tile-action>
           <v-icon>{{ out.icon }}</v-icon>
@@ -64,9 +67,9 @@
         </v-list-tile-content>
       </v-list-tile>
 
-
     </v-list>
     </v-navigation-drawer>
+    </v-flex>
      </v-app>
     </div>
 </template>
@@ -77,8 +80,9 @@
         drawer: true,
         items: [
           { title: 'Home', icon: 'dashboard' },
-          { title: 'Clients', icon: 'question_answer' },
-          { title: 'Clients', icon: 'fas fa-user-friends' }
+          { title: 'Clients', icon: "as fa-user-friends" },
+          { title: 'Edit', icon: 'fas fa-user-edit' },
+          { title: 'Add', icon: 'fas fa-user-plus' }
         ],
         logOut: [
             { title: 'log out', icon:"fas fa-sign-out-alt"}
@@ -86,6 +90,35 @@
         mini: true,
         right: null
       }
+    }, 
+    methods: {
+      submit () {
+        console.log('assssss');
+      },
+      goTo (value){
+        console.log(value)
+        if (value == 'Clients') {
+          window.location.href = "http://localhost:8080/#/userlist";
+        }
+        if (value == 'Add') {
+          window.location.href = "http://localhost:8080/#/addUser";
+        }
+        if (value == 'Edit') {
+          window.location.href = "http://localhost:8080/#/editUser";
+        }
+      },
+      logOutAdmin (value){
+        if (value.title == "log out") {
+        // izloguje se   
+        }
+      }
     }
   }
 </script>
+<script>
+  export default {
+  }
+</script>
+<style scoped>
+
+</style>

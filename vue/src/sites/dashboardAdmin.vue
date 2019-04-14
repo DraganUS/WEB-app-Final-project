@@ -1,6 +1,7 @@
 <template>
 	<div class="dashboardAdmin" >
-		<dashboardAdminNav></dashboardAdminNav>			
+		<dashboardAdminNav></dashboardAdminNav>	
+		
 	</div>
 </template>
 
@@ -26,3 +27,4 @@ export default {
 <style scoped>
 
 </style>
+

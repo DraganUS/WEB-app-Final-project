@@ -5,7 +5,7 @@
     <v-flex xs12 md5>
     <h3>Fiil the form to schedule an appointment</h3>
     </v-flex>
-  <form action="php/test.php" method="post">
+  <form  method="post" @submit.prevent="submit">
      <v-flex xs12 md5>
     <v-text-field 
       v-model="name"
@@ -40,9 +40,21 @@
       @blur="$v.select.$touch()"
     ></v-select>
     </v-flex>
-
+           <v-flex xs12>
+            <v-textarea
+            v-model="formBio"
+              color="teal"
+            >
+              <template v-slot:label>
+                <div>
+                  Bio <small>(optional)</small>
+                </div>
+              </template>
+            </v-textarea>
+          </v-flex>
     <v-layout  row wrap >
-    <v-flex xs12 sm6 >
+    <v-flex xs12 xl12 >
+<v-time-picker  color="green lighten-1" header-color="primary"> 
        <v-date-picker
        color="blue accent-2"
       v-model="date"
@@ -51,29 +63,24 @@
       class="mt-3"
       required
     ></v-date-picker>
+    </v-time-picker>
       <p>Pick a visit date</p>
+ 
     </v-flex>
   </v-layout>
+  
     <v-btn @click="submit">submit</v-btn>
     <v-btn @click="clear">clear</v-btn>
   </form>
    </v-container>
 </v-app>
-     <v-footer
-    dark
-    height="auto"
-  >
-    <v-card
-      class="flex"
-      flat
-      tile
-      
-    >
+    
+    
+     <v-footer dark height="auto">
+    <v-card  class="flex" flat tile>
       <v-card-title class="deep-orange darken-1" >
         <strong class="subheading">Get connected with us on social networks!</strong>
-
         <v-spacer></v-spacer>
-
         <v-btn
           v-for="icon in icons"
           :key="icon"
@@ -108,6 +115,7 @@
       name: '',
       email: '',
       select: null,
+      formBio: 'Visit reason: ',
       animal: [
         'Dog',
         'Cat',
@@ -158,9 +166,14 @@
         this.$v.$touch()
         console.log(
           this.name +
-          this.date
+          this.date +
+      this.select +
+      this.formBio +
+      this.animal 
         );
+window.location.href = "http://vue-final:8888/php/regv.php?name="+ this.name + "?&name2=value2";
       },
+ 
       clear () {
         this.$v.$reset()
         this.name = ''

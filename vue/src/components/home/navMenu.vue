@@ -1,10 +1,8 @@
 <template>
   <header class="header">
     <v-container>  
-    
       <nav>
-        <ul>
-        
+        <ul>  
           <li >
             <i class="fas fa-sign-in-alt" @click="modalShow"> LOG IN</i>
           </li>
@@ -12,89 +10,73 @@
       </nav>
     </v-container>  
      <div id="modal" v-bind:style="modalDisplay">
-  <v-form v-model="valid">
-    <i @click="modalNone" class="fas fa-times"></i>
-      <v-container>
-      <v-layout>
-        <v-flex
-          xs12
-          md4
-        >
-          <v-text-field
+   <v-form v-model="valid"  ref="form">
+        <i @click="modalNone" class="fas fa-times-circle"></i>
+        <v-text-field
+           label="Enter your e-mail address"
             v-model="email"
             :rules="emailRules"
-            label="E-mail"
             required
-          ></v-text-field>
-        </v-flex>
-
-        <v-flex
-          xs12
-          md4
-        >
-          <v-text-field
-            v-model="pass"
-            :rules="passRules"
-            label="Password"
+            ></v-text-field>
+            <v-text-field
+            label="Enter your password"
+            v-model="password"
+            min="8"
+            :append-icon="e1 ? 'visibility' : 'visibility_off'"
+           @click:append="() => (e1 = !e1)"
+            :type="e1 ? 'text' : 'password'"
+            :rules="passwordRules"
+            counter
             required
-          ></v-text-field>
-        </v-flex>
-
-        <v-flex
-          xs12
-          md4
-        >
-        <v-btn
-        :disabled="!valid"
-        color="success"
-        @click="validate"
-        >
-        Log In
-        </v-btn>
-
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-form>
+            ></v-text-field>
+            <v-flex xs12 md4>
+            <v-layout justify-space-between>
+            <v-btn @click="submit" :class=" { 'blue darken-4 white--text' : valid, disabled: !valid }">Login</v-btn>
+            </v-layout>
+         </v-flex>
+      </v-form>
   </div>
   </header>      
 </template>
   <script>
 export default {
+
+  
   data() {
     
     return {
-      valid: false,
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid'
-      ],
-      pass: '',
-      passRules: [
-        v => !!v || 'Password is required',
-        v => (v && v.length >= 6) || 'Password must be lonfger than 6 characters'
-      ],
-      modalDisplay: "display:visible",
-    }
-  },methods: {
-    modalNone : function (event) {
+       modalDisplay: "display:visible",
+       valid: false,
+            e1: false,
+            password: '',
+            passwordRules: [
+              (v) => !!v || 'Password is required',
+            ],
+            email: '',
+            emailRules: [
+              (v) => !!v || 'E-mail is required',
+              (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+            ],
+          }
+        },
+        beforeCreate() {
+      
+        },
+        methods: {
+          submit () {
+            if (this.$refs.form.validate()) {
+              this.$refs.form.$el.submit()
+            }
+          },
+          clear () {
+            this.$refs.form.reset()
+          },  
+     modalNone : function (event) {
       return this.modalDisplay ="display:none";
     },
     modalShow: function (event) {
       return this.modalDisplay ="";
-    },
-     validate () {
-        if (this.$refs.form.validate()) {
-          this.snackbar = true
-        }
-      },
-      reset () {
-        this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
-      }
+    }
     
   },
   
@@ -161,6 +143,14 @@ form ul{
 }
 h1{
   padding: 20px;
+}
+i.fa-times-circle{
+  cursor: pointer;
+  color: red;
+  font-size: 20px;
+  position: absolute;
+  top: 5px;
+  right: 5px
 }
 i.fa-sign-out-alt,i.fa-sign-in-alt{
   cursor: pointer;
