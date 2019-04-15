@@ -34,7 +34,7 @@
       v-model="select"
       :items="animal"
       :error-messages="selectErrors"
-      label="Chose Animal"
+      label="Visit Type"
       required
       @change="$v.select.$touch()"
       @blur="$v.select.$touch()"
@@ -54,7 +54,7 @@
           </v-flex>
     <v-layout  row wrap >
     <v-flex xs12 xl12 >
-<v-time-picker  color="green lighten-1" header-color="primary"> 
+<v-time-picker   format="24hr" color="green lighten-1" v-model="time" header-color="primary"> 
        <v-date-picker
        color="blue accent-2"
       v-model="date"
@@ -114,13 +114,11 @@
     data: () => ({
       name: '',
       email: '',
+      time: '11:15',
       select: null,
       formBio: 'Visit reason: ',
       animal: [
-        'Dog',
-        'Cat',
-        'Maus',
-        'Pig'
+        'Medical Emergensy','Check-up','Cosmetc','Consultation'
       ],
       date: new Date().toISOString().substr(0, 10),
       icons: [
@@ -164,14 +162,8 @@
     methods: {
       submit () {
         this.$v.$touch()
-        console.log(
-          this.name +
-          this.date +
-      this.select +
-      this.formBio +
-      this.animal 
-        );
-window.location.href = "http://vue-final:8888/php/regv.php?name="+ this.name + "?&name2=value2";
+window.location.href = "http://vue-final:8888/php/regv.php?name="+ this.name + 
+"&date=" +  this.date + "&animal=" + this.select + "&formBio=" + this.formBio + "&time=" +this.time;
       },
  
       clear () {

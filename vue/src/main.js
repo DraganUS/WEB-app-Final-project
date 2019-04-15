@@ -8,10 +8,12 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import Vuelidate from 'vuelidate'
 import SmartTable from 'vuejs-smart-table'
+import VueResource from 'vue-resource'
 
 Vue.use(SmartTable)
 Vue.use(Vuelidate)
 Vue.use(Vuetify)
+Vue.use(VueResource)
 
 Vue.config.productionTip = false
 

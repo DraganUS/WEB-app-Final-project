@@ -66,6 +66,30 @@ export default {
           submit () {
             if (this.$refs.form.validate()) {
               this.$refs.form.$el.submit()
+            var data = 'assss'
+          this.$http.post('http://vue-final:8888/php/test.php',
+      {
+        postdata: JSON.stringify(data)})
+      .then((response) => {
+        console.log(response);
+      });
+
+
+let var1 = 'firstName'
+let value1 = 'Fred'
+let var2 = 'lastName'
+let value2 = 'Flinstone'
+const api = axios.create({baseURL: 'http://vue-final:8888/php/test.php'})
+api.post('', {
+    var1: value1,
+    var2: value2
+})
+.then(res => {
+     console.log(res)
+})
+.catch(error => {
+     console.log(error)
+})
             }
           },
           clear () {
