@@ -123,7 +123,9 @@
 
       },
       goTo (value){
-        console.log(value)
+         if (value == 'Home') {
+          window.location.href = "http://localhost:8080/#/dashboardadmin";
+        }
         if (value == 'Clients') {
           window.location.href = "http://localhost:8080/#/userlist";
         }

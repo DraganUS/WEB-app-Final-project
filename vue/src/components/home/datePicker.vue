@@ -17,7 +17,7 @@
       @blur="$v.name.$touch()"
     ></v-text-field>
     </v-flex>
-
+    
     <v-flex xs12 md5>
     <v-text-field
       v-model="email"
