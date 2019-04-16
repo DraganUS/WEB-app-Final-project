@@ -3,30 +3,29 @@
     <v-app dark>      
     <v-container>
 
-        <v-flex xs2>
-          <label>Filter by Name:</label>
-        <v-text-field class="form-control" v-model="filters.name.value"
-            label="Search By Name"
-          ></v-text-field>
-      <v-table
-        :data="users"
-        :filters="filters"
-      >
-        <thead slot="head">
-        <th>Name</th>
-        <th>Age</th>
-        <th>Email</th>
+        <v-flex xs5>
+        <v-text-field class="form-control" v-model="filters.first_name.value" label="Search By Name">
+          </v-text-field>
+          <v-text-field class="form-control" v-model="filters.pet_name.value" label="Search By Pet Name"></v-text-field>
+          <v-table :data="users" :filters="filters" xs10>
+          <thead slot="head">
+            <th>First_name</th>
+            <th>Last_name</th>
+            <th>Pet_name</th>
+            <th>Pet_species</th>
         </thead>
         <tbody slot="body" slot-scope="{displayData}">
         <tr v-for="row in displayData" :key="row.guid">
-          <td>{{ row.name }}</td>
-          <td>{{ row.age }}</td>
-          <td>{{ row.email }}</td>
+          <td>{{ row.first_name }}</td>
+          <td>{{ row.last_name }}</td>
+          <td>{{ row.pet_name }}</td>
+          <td>{{ row.pets_species_name }}</td>
         </tr>
         </tbody>
       </v-table>
       </v-flex>
-        </v-container>
+
+     </v-container>
     </v-app>    
     </div>
 </template>
@@ -35,15 +34,32 @@
 // import users from './users.json'
 export default {
   name: 'BasicFiltering',
+  info:[],
   data: () => ({
-    users:[
-        {name: 'Marko' , age:12, email:'Marko@marko', address: 'Dog' },
-        {name: 'Petar' , age:22, email:'sad@asd.com', address: 'Cat' },
-        {name: 'Pera' , age:23, email:'s@asdasad.com', address: 'Pig' },
-    ],
+    users:[],
     filters: {
-      name: { value: '', keys: ['name'] }
+      first_name: { value: '', keys: ['first_name'] },
+      pet_name: {value: '', keys: ['pet_name']}
     }
-  })
+  }),
+    beforeCreate() {
+      console.log('assss');
+        fetch("http://vue-final:8888/php/petsapi.php")
+       .then(response => response.json())
+       .then((data) => {
+       this.users = data;
+      })
+    },
+    methods:{
+      test(){
+        console.log('asd');
+      }
+    }
 }
+
 </script>
+<style scoped>
+thead{
+  margin: 30px;
+}
+</style>

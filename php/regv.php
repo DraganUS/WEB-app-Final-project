@@ -5,7 +5,7 @@ require 'functions.php';
 if (!empty($_GET)){
 if (array_key_exists('name', $_GET)) {
     $name = $_GET['name'];
-    $name = filter_var($name, FILTER_SANITIZE_ENCODED);
+    $name = filter_var($name, FILTER_SANITIZE_STRING);
 }
 if (array_key_exists('date', $_GET)) {
     $date = $_GET['date'];

@@ -15,6 +15,33 @@ function findAll(mysqli $database)
     return $users;
 }
 
+function findAdmin(mysqli $database)
+{
+    $statement = $database->prepare("SELECT username, pass FROM user WHERE administrator ='true'");
+
+    if (!$statement) {
+        throw new Exception('Statement not created' . $database->error);
+    }
+
+    $statement->execute();
+    $users = $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    return $users;
+}
+function findUsers(mysqli $database)
+{
+    $statement = $database->prepare("SELECT * FROM user ");
+
+    if (!$statement) {
+        throw new Exception('Statement not created' . $database->error);
+    }
+
+    $statement->execute();
+    $users = $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    return $users;
+}
+
 
 function addVisit(mysqli $database, $date, $name, $formBio,  $animal,  $time)
 {

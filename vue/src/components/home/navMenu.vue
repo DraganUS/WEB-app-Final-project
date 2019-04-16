@@ -45,6 +45,7 @@ export default {
   data() {
     
     return {
+       info: [],
        modalDisplay: "display:visible",
        valid: false,
             e1: false,
@@ -55,41 +56,38 @@ export default {
             email: '',
             emailRules: [
               (v) => !!v || 'E-mail is required',
-              (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+              (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{3})+$/.test(v) || 'E-mail must be valid'
             ],
           }
         },
         beforeCreate() {
-      
-        },
+    
+     fetch("http://vue-final:8888/php/findadmin.php")
+       .then(response => response.json())
+       .then((data) => {
+       this.info = data;
+      //  console.log(this.info[0].username);
+        // console.log(this.info[0].pass);
+        // var passwordHash = require('password-hash');
+        //  var hashedPassword = passwordHash.generate('nikola.starcevic@gmail.com');
+        // email: nikola.starcevic@gmail.com
+        // pass: Nikola123
+        // console.log(hashedPassword);
+        // console.log(passwordHash.verify(this.password, this.info[0].pass));     
+      })
+
+    },
         methods: {
           submit () {
             if (this.$refs.form.validate()) {
               this.$refs.form.$el.submit()
-            var data = 'assss'
-          this.$http.post('http://vue-final:8888/php/test.php',
-      {
-        postdata: JSON.stringify(data)})
-      .then((response) => {
-        console.log(response);
-      });
+              var passwordHash = require('password-hash')
+              
+              validEmail = passwordHash.verify(this.email, this.info[0].username)
+              validPass = passwordHash.verify(this.password, this.info[0].pass)
 
-
-let var1 = 'firstName'
-let value1 = 'Fred'
-let var2 = 'lastName'
-let value2 = 'Flinstone'
-const api = axios.create({baseURL: 'http://vue-final:8888/php/test.php'})
-api.post('', {
-    var1: value1,
-    var2: value2
-})
-.then(res => {
-     console.log(res)
-})
-.catch(error => {
-     console.log(error)
-})
+              console.log(passwordHash.verify(this.email, this.info[0].username)); 
+              console.log(passwordHash.verify(this.password, this.info[0].pass));     
             }
           },
           clear () {
