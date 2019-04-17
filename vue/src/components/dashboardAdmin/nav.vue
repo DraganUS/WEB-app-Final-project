@@ -116,6 +116,9 @@
       }
     },
      beforeCreate(){
+               if (!this.$session.exists('username')) {
+                window.location.href = "http://localhost:8080/?#/"
+              }
         fetch("http://vue-final:8888/php/petsapi.php")
        .then(response => response.json())
        .then((data) => {
@@ -142,7 +145,8 @@
       },
       logOutAdmin (value){
         if (value.title == "log out") {
-        // izloguje se   
+             this.$session.remove('username');
+            window.location.href = "http://localhost:8080/?#/"
         }
       }
     }

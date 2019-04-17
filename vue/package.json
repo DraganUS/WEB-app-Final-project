@@ -17,6 +17,7 @@
     "vue-material": "^1.0.0-beta-10.2",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
+    "vue-sessionstorage": "^1.0.0",
     "vuejs-smart-table": "0.0.5",
     "vuelidate": "^0.7.4",
     "vuetify": "^1.5.11"

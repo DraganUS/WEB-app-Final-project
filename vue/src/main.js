@@ -9,7 +9,9 @@ import 'vuetify/dist/vuetify.min.css'
 import Vuelidate from 'vuelidate'
 import SmartTable from 'vuejs-smart-table'
 import VueResource from 'vue-resource'
+import VueSessionStorage from 'vue-sessionstorage'
 
+Vue.use(VueSessionStorage)
 Vue.use(SmartTable)
 Vue.use(Vuelidate)
 Vue.use(Vuetify)
