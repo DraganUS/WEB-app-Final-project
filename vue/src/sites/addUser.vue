@@ -4,61 +4,8 @@
       <v-container>
         <h2>ADD USER</h2>
     <v-flex xs12 md5>
-    <h3>Fiil the form to schedule an appointment</h3>
+    <h3>Fiil the form to add a new usser</h3>
     </v-flex>
-  <form  method="post" @submit.prevent="submit">
-    
-    <v-flex xs12 md5>
-    <v-text-field 
-      v-model="first_name"
-      :error-messages="first_nameErrors"
-      :counter="10"
-      label="First Name"
-      required
-      @input="$v.first_name.$touch()"
-      @blur="$v.first_name.$touch()"
-    ></v-text-field>
-    </v-flex>
-    
-    <v-flex xs12 md5  color="green lighten-1">
-    <v-text-field
-      v-model="last_name"
-      :error-messages="last_nameErrors"
-      :counter="10"
-      label="Last Name"
-      required
-      @input="$v.last_name.$touch()"
-      @blur="$v.last_name.$touch()"
-    ></v-text-field>
-    </v-flex>
-    
-    <v-flex xs12 md5>
-    <v-text-field 
-      v-model="pets_species"
-      :error-messages="pets_speciesErrors"
-      :counter="10"
-      label="Pet Name"
-      required
-      @input="$v.pets_species.$touch()"
-      @blur="$v.pets_species.$touch()"
-    ></v-text-field>
-    </v-flex>
-
-     <v-flex xs12 md5>
-        <v-select
-      v-model="select"
-      :items="petSpacies"
-      :error-messages="selectErrors"
-      label="Item"
-      required
-      @change="$v.select.$touch()"
-      @blur="$v.select.$touch()"
-        ></v-select>
-          </v-flex>
-  
-    <v-btn @click="submit">submit</v-btn>
-    <v-btn @click="clear">clear</v-btn>
-  </form>
 
       </v-container>
 <v-flex xs6 centered>
@@ -128,14 +75,11 @@
 <script>
   import { validationMixin } from 'vuelidate'
   import { required, maxLength} from 'vuelidate/lib/validators'
+  
   export default {
     mixins: [validationMixin],
     validations: {
-      first_name: { required, maxLength: maxLength(10) },
-      last_name: { required, maxLength: maxLength(10) },
-      last_name: { required, maxLength: maxLength(10) },
-      pets_species: { required, maxLength: maxLength(10) },
-      select: { required },
+     
     },
     data: () => ({
 
@@ -155,14 +99,14 @@
         first_name: '',
         last_name: '',
         select: null,
-        petSpacies: [
+        pets_species: [
         	"Retriver",
 	        "Malteser",
 	        "Staford",
 	        "Beagle",
 	        "Dogge"
         ],
-        checkbox: false,
+        pet_name: '',
         items: [
           { title: 'Home', icon: 'dashboard' },
           { title: 'Clients', icon: "as fa-user-friends" },
@@ -174,28 +118,14 @@
        
       },
       computed:{
-         selectErrors () {
-        const errors = []
-        if (!this.$v.select.$dirty) return errors
-        !this.$v.select.required && errors.push('Item is required')
-        return errors
-       },FirstNameErrors () {
-        const errors = []
-        if (!this.$v.name.$dirty) return errors
-        !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
-        !this.$v.name.required && errors.push('Name is required.')
-        return errors
-      }
+       
       },
       methods: {
       submit () {
-
+       
       },
        clear () {
-        this.$v.$reset()
-        this.first_name = ''
-        this.last_name = ''
-        this.select = null
+       
       },
       goTo (value){
         if (value == 'Home') {

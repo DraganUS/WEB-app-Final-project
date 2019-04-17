@@ -82,10 +82,13 @@ export default {
             if (this.$refs.form.validate()) {
               this.$refs.form.$el.submit()
               var passwordHash = require('password-hash')
-              
-              validEmail = passwordHash.verify(this.email, this.info[0].username)
-              validPass = passwordHash.verify(this.password, this.info[0].pass)
-
+              if ( 
+                passwordHash.verify(this.email, this.info[0].username) &&
+                passwordHash.verify(this.password, this.info[0].pass)
+              ) {
+                console.log('yeaahh baby');
+              }
+             
               console.log(passwordHash.verify(this.email, this.info[0].username)); 
               console.log(passwordHash.verify(this.password, this.info[0].pass));     
             }
