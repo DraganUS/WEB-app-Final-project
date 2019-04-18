@@ -9,7 +9,7 @@ header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
 header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 
 
-var_dump($_GET);
+
 if (!empty($_GET)){
     if (array_key_exists('first_name', $_GET)) {
         $first_name = $_GET['first_name'];
@@ -49,26 +49,20 @@ if (!empty($_GET)){
 
 
 
-//    user_ID - kod pet za user
-//    $pet_name
 
-//    $first_name
-//    $last_name
-//    $select
-//
-
-//    $first_name
-//    $last_name
-//    $select
-//    $pet_name
+//    INSERT INTO `user` ( `first_name`, `last_name`) VALUES ( 'peromir', 'peric1');
+//    SELECT ID FROM users WHERE id=max(id)
+//    INSERT INTO pets (`pet_name`, `user_ID`, `pets_species_ID`) VALUES ($pet_name, $user_ID, $select);
 
 
-
-//    try {
-//        $apoitment =  addVisit($database,  $date, $first_name, $select,  $last_name,  $pet_name);
+    try {
+        $statement =  addUser( $database,  $first_name, $last_name);
+        $lastUser = lastUser($database);
+        addPet($database, $pet_name, $lastUser, $select);
+        var_dump($statement);
 //        header("Location: http://localhost:8080/#/");
-//    } catch (Exception $exception) {
-//        $apoitment = [];
-//    }
+    } catch (Exception $exception) {
+        $statement = [];
+    }
 }
 ?>

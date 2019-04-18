@@ -70,3 +70,34 @@ function addVisit(mysqli $database, $date, $name, $formBio,  $animal,  $email, $
     return $statement;
 }
 
+function addUser(mysqli $database,  $first_name, $last_name)
+{
+    $statement = $database->prepare("INSERT INTO `user` ( `first_name`, `last_name`) VALUES ( ?, ?)");
+    $statement->bind_param('ss', $first_name,$last_name);
+    if (!$statement) {
+        throw new Exception('Statement user not created' . $database->error);
+    }
+    $statement->execute();
+
+    return $statement ;
+}
+
+function lastUser(mysqli $database)
+{
+    $findMaxID = $database->prepare("SELECT ID from user ORDER BY ID DESC LIMIT 1");
+    $findMaxID->execute();
+    $user_ID = $findMaxID->get_result()->fetch_all(MYSQLI_ASSOC);
+    $user_ID = $user_ID[0]['ID'];
+    return $user_ID;
+}
+function addPet(mysqli $database, $pet_name, $lastUser, $select )
+{
+    $pets = $database->prepare(" INSERT INTO pets (`pet_name`, `user_ID`, `pets_species_ID`)
+  VALUES (?,?,?)");
+    $pets->bind_param('sii',  $pet_name, $lastUser, $select );
+
+    if (!$pets) {
+        throw new Exception('Statement user not created' . $database->error);
+    }
+    $pets->execute();
+}
