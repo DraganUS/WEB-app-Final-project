@@ -56,19 +56,17 @@ function findUsers(mysqli $database)
     return $users;
 }
 
-
-function addVisit(mysqli $database, $date, $name, $formBio,  $animal,  $time)
+function addVisit(mysqli $database, $date, $name, $formBio,  $animal,  $email, $time)
 {
-    $statement = $database->prepare(" INSERT INTO `visits` ( `visit_date`, `visit_title`, `visit_desciption`, `visit_type`, `visit_time`) 
- VALUES (?,?,?,?,?)");
+    $statement = $database->prepare(" INSERT INTO `visits` ( `visit_date`, `visit_title`, `visit_desciption`, `visit_type`, `email` ,`visit_time`) 
+ VALUES (?,?,?,?,?,?)");
 
-    $statement->bind_param('sssss',$date,$name, $formBio, $animal,  $time );
+    $statement->bind_param('ssssss',$date,$name, $formBio, $animal, $email ,$time );
     if (!$statement) {
         throw new Exception('Statement not created' . $database->error);
-        
     }
-
     $statement->execute();
+
     return $statement;
 }
 

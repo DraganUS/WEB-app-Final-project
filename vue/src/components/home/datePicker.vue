@@ -1,6 +1,35 @@
 <template>
 <div class="register">    
     <v-app dark>
+       <div class="text-xs-center">
+    <v-dialog
+      v-model="dialog"
+      width="500"
+    >
+      <v-card>
+        <v-card-title
+          class="headline green accent-4"
+          primary-title
+          
+        >
+          Visit termin success
+        </v-card-title>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            flat
+            @click="dialog = false"
+          >
+            close
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
   <v-container >  
     <v-flex xs12 md5>
     <h3>Fiil the form to schedule an appointment</h3>
@@ -69,7 +98,7 @@
     </v-flex>
   </v-layout>
   
-    <v-btn @click="submit">submit</v-btn>
+    <v-btn  @click="submit">submit</v-btn>
     <v-btn @click="clear">clear</v-btn>
   </form>
    </v-container>
@@ -112,6 +141,8 @@
     },
 
     data: () => ({
+      dialog: false,
+      
       name: '',
       email: '',
       time: '11:15',
@@ -131,13 +162,7 @@
     }),
 
     computed: {
-      checkboxErrors () {
-        const errors = []
-        if (!this.$v.checkbox.$dirty) return errors
-        !this.$v.checkbox.checked && errors.push('You must agree to continue!')
-        return errors
-      },
-      selectErrors () {
+       selectErrors () {
         const errors = []
         if (!this.$v.select.$dirty) return errors
         !this.$v.select.required && errors.push('Animal type is required')
@@ -160,17 +185,19 @@
     },
 
     methods: {
-      submit () {
+        submit () {
         this.$v.$touch()
-window.location.href = "http://vue-final:8888/php/regv.php?name="+ this.name + 
-"&date=" +  this.date + "&animal=" + this.select + "&formBio=" + this.formBio + "&time=" +this.time;
+        
+        window.location.href = "http://vue-final:8888/php/regv.php?name="+ this.name + 
+        "&date=" +  this.date + "&animal=" + this.select
+         + "&formBio=" + this.formBio + "&time=" +this.time + "&email=" +this.email;
       },
- 
       clear () {
         this.$v.$reset()
         this.name = ''
         this.email = ''
         this.select = null
+        this.formBio = 'Visit reason: '
       }
     }
   }

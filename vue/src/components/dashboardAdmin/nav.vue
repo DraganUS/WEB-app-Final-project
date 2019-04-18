@@ -28,17 +28,19 @@
        
         <v-table  light :data="visits"  xs10>
           <thead slot="head">
+            <th> Name </th>
             <th> Visit Date </th>
             <th> Visit Time </th>
-            <th> Visit Title </th>
+            <th> Visitor Email </th>
             <th> Visit Type </th>
             <th> Visit Desciption </th>
           </thead>
           <tbody slot="body" slot-scope="{displayData}">
             <tr v-for="row in displayData" :key="row.guid">
+              <td class="text-xs">{{ row.visit_title }}</td>
               <td class="text-xs">{{ row.visit_date }}</td>
               <td class="text-xs">{{ row.visit_time }}</td>
-              <td class="text-xs">{{ row.visit_title }}</td>
+              <td class="text-xs">{{ row.email }}</td>
               <td class="text-xs">{{ row.visit_type}}</td>
               <td class="text-xs">{{ row.visit_desciption }}</td>
             </tr>
