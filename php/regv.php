@@ -26,10 +26,10 @@ if (array_key_exists('animal', $_GET)) {
     }
 
     try {
-        $apoitment =  addVisit($database,  $date, $name, $formBio,  $animal,  $time);
-        header("Location: http://localhost:8080/#/");
+        $statement =  addVisit($database,  $date, $name, $formBio,  $animal,  $time);
+        header("Location: http://localhost:8080/");
     } catch (Exception $exception) {
-        $apoitment = [];
+        $statement = [];
     }
 }
 ?>

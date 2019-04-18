@@ -2,6 +2,14 @@
 require 'dbConect.php';
 require 'functions.php';
 
+header('Access-Control-Allow-Origin: hhttp://localhost:8080/#/');
+header('Access-Control-Allow-Origin: http://localhost:8080');
+header("Access-Control-Allow-Credentials", "true");
+header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+
+
+var_dump($_GET);
 if (!empty($_GET)){
     if (array_key_exists('first_name', $_GET)) {
         $first_name = $_GET['first_name'];
@@ -21,10 +29,33 @@ if (!empty($_GET)){
         $pet_name = filter_var($pet_name, FILTER_SANITIZE_STRING);
     }
 
+    if ($select == 'Retriver'){
+        $select = 1;
+    }
+    if ($select == 'Malteser'){
+        $select = 2;
+    }
+    if ($select == 'Staford'){
+        $select = 3;
+    }
+    if ($select == 'Beagle'){
+        $select = 4;
+    }
+    if ($select == 'Dogge'){
+        $select = 5;
+    }else {
+        $select = '';
+    }
+
+
+
+//    user_ID - kod pet za user
+//    $pet_name
+
 //    $first_name
 //    $last_name
 //    $select
-//    $pet_name
+//
 
 //    $first_name
 //    $last_name

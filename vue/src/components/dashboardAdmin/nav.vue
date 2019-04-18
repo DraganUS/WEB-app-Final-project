@@ -2,16 +2,16 @@
     <div class="nav">      
       <v-app dark>   
       <v-container>
-        <h2>PET LIST TABLE</h2>
+        <h2>PET LIST TABLE <i class="fas fa-table"></i></h2>
      <v-flex xs8>
         <v-text-field class="form-control" v-model="filters.first_name.value" label="Search By Name"></v-text-field>
         <v-text-field class="form-control" v-model="filters.pet_name.value" label="Search By Pet Name"></v-text-field>
         <v-table  light :data="users" :filters="filters" xs10>
           <thead slot="head">
-            <th> First name |</th>
-            <th>Last name |</th>
-            <th>Pet name |</th>
-            <th>Pet species |</th>
+            <th> First name </th>
+            <th>Last name </th>
+            <th>Pet name </th>
+            <th>Pet species </th>
           </thead>
           <tbody slot="body" slot-scope="{displayData}">
             <tr v-for="row in displayData" :key="row.guid">
@@ -19,6 +19,28 @@
               <td class="text-xs">{{ row.last_name }}</td>
               <td class="text-xs">{{ row.pet_name }}</td>
               <td class="text-xs">{{ row.pets_species_name }}</td>
+            </tr>
+          </tbody>
+         </v-table>
+    </v-flex><br><br><hr><br><br>
+      <h2>Termin list <i class="fas fa-calendar-plus"></i></h2>
+     <v-flex xs8>
+       
+        <v-table  light :data="visits"  xs10>
+          <thead slot="head">
+            <th> Visit Date </th>
+            <th> Visit Time </th>
+            <th> Visit Title </th>
+            <th> Visit Type </th>
+            <th> Visit Desciption </th>
+          </thead>
+          <tbody slot="body" slot-scope="{displayData}">
+            <tr v-for="row in displayData" :key="row.guid">
+              <td class="text-xs">{{ row.visit_date }}</td>
+              <td class="text-xs">{{ row.visit_time }}</td>
+              <td class="text-xs">{{ row.visit_title }}</td>
+              <td class="text-xs">{{ row.visit_type}}</td>
+              <td class="text-xs">{{ row.visit_desciption }}</td>
             </tr>
           </tbody>
          </v-table>
@@ -97,6 +119,7 @@
     data () {
       return {
        users:[],
+       visits:[],
       filters: {
         first_name: { value: '', keys: ['first_name'] },
         pet_name: { value: '', keys: ['pet_name'] }
@@ -121,9 +144,14 @@
               }
         fetch("http://vue-final:8888/php/petsapi.php")
        .then(response => response.json())
-       .then((data) => {
-       this.users = data;
-      })
+       .then((data) => {this.users = data;})
+       
+
+        fetch("http://vue-final:8888/php/visitsapi.php")
+       .then(response => response.json())
+       .then((data) => {this.visits = data;})
+       
+
     },
     methods: {
       submit () {
@@ -153,16 +181,27 @@
   }
 </script>
 <style scoped>
+  .spacing-playground .v-select .v-input__prepend-outer, .spacing-playground .v-select .v-input__append-outer{
+    margin-top: 0.55rem;
+    margin-right: 0.2rem;
+  }
 .v-navigation-drawer--close.v-navigation-drawer--temporary {
   height: 100%;
 }
-div#table{
-  text-align: center;
-  /* height: 100%; */
-  /* width: 100%; */
-  background: red;
-  display: flex;
-  justify-content: center;
-  align-items: center; 
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #9c9393;
+  color: black;
 }
 </style>

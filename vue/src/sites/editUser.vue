@@ -141,7 +141,7 @@
 				fr.addEventListener('load', () => {
 					this.imageUrl = fr.result
 					this.imageFile = files[0] // this is an image file that can be sent to server...
-					console.log(this.imageFile)
+					// console.log(this.imageFile)
 				})
 			} else {
 				this.imageName = ''
@@ -152,13 +152,31 @@
 
       submit () {
 		this.$v.$touch()
-		 console.log(this.first_name);
-           console.log(this.last_name);
-		   console.log(this.select);
-		   console.log(this.pet_name);
 
-		//    window.location.href = "http://vue-final:8888/php/reguser.php?first_name="+ this.first_name + 
-		// "&last_name=" +  this.last_name + "&select=" + this.select + "&pet_name=" + this.pet_name;
+			axios.post('http://vue-final:8888/php/reguser.php',
+  			this.imageFile,
+  			{
+    		headers: {
+        	'Content-Type': 'multipart/form-data'
+    			}
+  			}
+		).then(function(){
+  		console.log('SUCCESS!!');
+		})
+		.catch(function(){
+  		console.log('FAILURE!!');
+		});
+
+    
+		//  console.log(this.first_name);
+        //    console.log(this.last_name);
+		//    console.log(this.select);
+		//    console.log(this.pet_name);
+
+         window.location.href = "http://vue-final:8888/php/reguser.php?first_name=" + this.first_name 
+         + "&last_name=" +  this.last_name 
+         + "&select=" + this.select 
+         + "&pet_name=" + this.pet_name;
 
       },
       clear () {
