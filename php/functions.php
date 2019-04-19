@@ -58,7 +58,7 @@ function findUsers(mysqli $database)
 
     $statement->execute();
     $users = $statement->get_result()->fetch_all(MYSQLI_ASSOC);
-    
+
     return $users;
 }
 
