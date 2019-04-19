@@ -51,14 +51,7 @@
 						accept="image/*"
 						@change="onFilePicked"
 					>
-				
-
-
-
-
-
-
-
+		
     <v-btn @click="submit">submit</v-btn>
     <v-btn @click="clear">clear</v-btn>
   </form>
@@ -92,8 +85,7 @@
 	        "Staford",
 	        "Beagle",
 	        "Dogge"
-        ],
-      checkbox: false
+        ]
     }),
     computed: {
       selectErrors () {
@@ -166,12 +158,6 @@
 		.catch(function(){
   		console.log('FAILURE!!');
 		});
-
-    
-		//  console.log(this.first_name);
-        //    console.log(this.last_name);
-		//    console.log(this.select);
-		//    console.log(this.pet_name);
 
          window.location.href = "http://vue-final:8888/php/reguser.php?first_name=" + this.first_name 
          + "&last_name=" +  this.last_name 

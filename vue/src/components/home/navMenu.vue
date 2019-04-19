@@ -63,24 +63,13 @@ export default {
         beforeCreate() {
            if (this.$session.exists('username')) {
                 window.location.href = "http://localhost:8080/?#/dashboardAdmin"
-                // this.$session.remove('username');
-                // if (this.$session.exists('username')) {
-                //   console.log('postoji i dalje')
-                // }else{console.log('nema ejee')}
               }
     
      fetch("http://vue-final:8888/php/findadmin.php")
        .then(response => response.json())
        .then((data) => {
        this.info = data;
-      //  console.log(this.info[0].username);
-        // console.log(this.info[0].pass);
-        // var passwordHash = require('password-hash');
-        //  var hashedPassword = passwordHash.generate('nikola.starcevic@gmail.com');
-        // email: nikola.starcevic@gmail.com
-        // pass: Nikola123
-        // console.log(hashedPassword);
-        // console.log(passwordHash.verify(this.password, this.info[0].pass));     
+      
       })
 
     },

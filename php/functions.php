@@ -42,6 +42,12 @@ function findAdmin(mysqli $database)
 
     return $users;
 }
+
+/**
+ * @param mysqli $database
+ * @return mixed
+ * @throws Exception
+ */
 function findUsers(mysqli $database)
 {
     $statement = $database->prepare("SELECT * FROM user ");
@@ -52,7 +58,7 @@ function findUsers(mysqli $database)
 
     $statement->execute();
     $users = $statement->get_result()->fetch_all(MYSQLI_ASSOC);
-
+    
     return $users;
 }
 

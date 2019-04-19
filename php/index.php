@@ -1,7 +1,7 @@
 <?php
 require 'dbConect.php';
 require 'functions.php';
-header('Access-Control-Allow-Origin: hhttp://localhost:8080/#/');
+header('Access-Control-Allow-Origin: http://localhost:8080/#/');
 header('Access-Control-Allow-Origin: http://localhost:8080');
 
 header("Access-Control-Allow-Credentials", "true");

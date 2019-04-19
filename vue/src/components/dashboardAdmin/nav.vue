@@ -1,9 +1,9 @@
 <template>
     <div class="nav">      
       <v-app dark>   
-      <v-container>
+      <v-container grid-list-xl text-xs-center>
         <h2>PET LIST TABLE <i class="fas fa-table"></i></h2>
-     <v-flex xs8>
+     <v-flex xs11 md11>
         <v-text-field class="form-control" v-model="filters.first_name.value" label="Search By Name"></v-text-field>
         <v-text-field class="form-control" v-model="filters.pet_name.value" label="Search By Pet Name"></v-text-field>
         <v-table  light :data="users" :filters="filters" xs10>
@@ -24,8 +24,7 @@
          </v-table>
     </v-flex><br><br><hr><br><br>
       <h2>Termin list <i class="fas fa-calendar-plus"></i></h2>
-     <v-flex xs8>
-       
+     <v-flex xs11 md11>
         <v-table  light :data="visits"  xs10>
           <thead slot="head">
             <th> Name </th>
@@ -113,7 +112,6 @@
     </div>
 </template>
  
-
 <script>
   export default {
   name: 'BasicFiltering',
@@ -130,7 +128,6 @@
         items: [
           { title: 'Home', icon: 'dashboard' },
           { title: 'Clients', icon: "as fa-user-friends" },
-          { title: 'Edit', icon: 'fas fa-user-edit' },
           { title: 'Add', icon: 'fas fa-user-plus' }
         ],
         logOut: [
@@ -152,26 +149,21 @@
         fetch("http://vue-final:8888/php/visitsapi.php")
        .then(response => response.json())
        .then((data) => {this.visits = data;})
-       
-
     },
     methods: {
-      submit () {
-
-      },
       goTo (value){
-         if (value == 'Home') {
-          window.location.href = "http://localhost:8080/#/dashboardadmin";
-        }
-        if (value == 'Clients') {
-          window.location.href = "http://localhost:8080/#/userlist";
-        }
-        if (value == 'Add') {
-          window.location.href = "http://localhost:8080/#/addUser";
-        }
-        if (value == 'Edit') {
-          window.location.href = "http://localhost:8080/#/editUser";
-        }
+          if (value == 'Home') {
+            window.location.href = "http://localhost:8080/#/dashboardadmin";
+          }
+          if (value == 'Clients') {
+            window.location.href = "http://localhost:8080/#/userlist";
+          }
+          if (value == 'Add') {
+            window.location.href = "http://localhost:8080/#/addUser";
+          }
+          if (value == 'Edit') {
+            window.location.href = "http://localhost:8080/#/editUser";
+          }
       },
       logOutAdmin (value){
         if (value.title == "log out") {

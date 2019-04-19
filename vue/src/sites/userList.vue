@@ -1,15 +1,15 @@
 <template>
     <div class="nav">      
       <v-app dark>   
-      <v-container>
+      <v-container grid-list-xl text-xs-center>
         <h2>USER LIST TABLE</h2>
-     <v-flex xs4>
+     <v-flex xs11 md11>
         <v-text-field class="form-control" v-model="filters.first_name.value" label="Search By Name"></v-text-field>
         <v-text-field class="form-control" v-model="filters.last_name.value" label="Search By Last Name"></v-text-field>
         <v-table  light :data="users" :filters="filters" xs10>
           <thead slot="head">
-            <th> First name |</th>
-            <th>Last name |</th>
+            <th> First name </th>
+            <th>Last name </th>
           </thead>
           <tbody slot="body" slot-scope="{displayData}">
             <tr v-for="row in displayData" :key="row.guid">
@@ -101,7 +101,6 @@
         items: [
           { title: 'Home', icon: 'dashboard' },
           { title: 'Clients', icon: "as fa-user-friends" },
-          { title: 'Edit', icon: 'fas fa-user-edit' },
           { title: 'Add', icon: 'fas fa-user-plus' }
         ],
         logOut: [
@@ -148,13 +147,21 @@
 .v-navigation-drawer--close.v-navigation-drawer--temporary {
   height: 100%;
 }
-div#table{
-  text-align: center;
-  /* height: 100%; */
-  /* width: 100%; */
-  background: red;
-  display: flex;
-  justify-content: center;
-  align-items: center; 
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #9c9393;
+  color: black;
 }
 </style>

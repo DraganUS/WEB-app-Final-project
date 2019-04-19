@@ -59,8 +59,7 @@ if (!empty($_GET)){
         $statement =  addUser( $database,  $first_name, $last_name);
         $lastUser = lastUser($database);
         addPet($database, $pet_name, $lastUser, $select);
-        var_dump($statement);
-//        header("Location: http://localhost:8080/#/");
+        header("Location: http://localhost:8080/#/");
     } catch (Exception $exception) {
         $statement = [];
     }
